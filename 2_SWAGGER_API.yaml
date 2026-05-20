@@ -1,0 +1,165 @@
+openapi: 3.0.0
+info:
+  title: ChoppOn API v1
+  description: API REST para o aplicativo mobile ChoppOn (Flutter)
+  version: 1.0.0
+servers:
+  - url: https://ochoppoficial.com.br/api/v1
+    description: Servidor de Produção
+paths:
+  /auth/login:
+    post:
+      summary: Login de Cliente
+      tags:
+        - Autenticação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                cpf:
+                  type: string
+                  example: "12345678900"
+                senha:
+                  type: string
+                  example: "senha123"
+      responses:
+        '200':
+          description: Login bem-sucedido
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LoginResponse'
+        '401':
+          description: Credenciais inválidas
+
+  /auth/admin_login:
+    post:
+      summary: Login de Administrador/Técnico
+      tags:
+        - Autenticação
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                email:
+                  type: string
+                  example: "admin@choppon.com.br"
+                password:
+                  type: string
+                  example: "admin123"
+      responses:
+        '200':
+          description: Login bem-sucedido
+
+  /clientes/profile:
+    get:
+      summary: Obter perfil do cliente
+      tags:
+        - Clientes
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dados do perfil
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProfileResponse'
+
+  /pontos/dashboard:
+    get:
+      summary: Obter dados do dashboard de pontos
+      tags:
+        - Pontos
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Dados do dashboard
+
+  /extrato/consumo:
+    get:
+      summary: Obter histórico de consumo
+      tags:
+        - Extrato
+      security:
+        - bearerAuth: []
+      parameters:
+        - name: page
+          in: query
+          schema:
+            type: integer
+            default: 1
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+      responses:
+        '200':
+          description: Lista de consumos paginada
+
+  /ranking/nacional:
+    get:
+      summary: Obter ranking nacional (Top 10)
+      tags:
+        - Ranking
+      security:
+        - bearerAuth: []
+      responses:
+        '200':
+          description: Lista do ranking
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+  schemas:
+    LoginResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        token:
+          type: string
+        refresh_token:
+          type: string
+        user:
+          type: object
+          properties:
+            id:
+              type: integer
+            nome:
+              type: string
+            cpf:
+              type: string
+            pontos:
+              type: number
+            saldo:
+              type: number
+    ProfileResponse:
+      type: object
+      properties:
+        success:
+          type: boolean
+        data:
+          type: object
+          properties:
+            id:
+              type: integer
+            nome:
+              type: string
+            email:
+              type: string
+            telefone:
+              type: string
+            pontos_cashback:
+              type: number
