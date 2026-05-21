@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:choppon_app/core/routes/app_router.dart';
-import 'package:choppon_app/core/constants/app_colors.dart';
+import 'core/constants/app_colors.dart';
+import 'core/routes/app_router.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  // Inicializar Firebase, Hive, GetIt aqui
-  
   runApp(
     const ProviderScope(
       child: ChoppOnApp(),
@@ -31,6 +28,7 @@ class ChoppOnApp extends ConsumerWidget {
           brightness: Brightness.light,
         ),
         useMaterial3: true,
+        fontFamily: 'Roboto',
       ),
       darkTheme: ThemeData(
         colorScheme: ColorScheme.fromSeed(
@@ -38,6 +36,7 @@ class ChoppOnApp extends ConsumerWidget {
           brightness: Brightness.dark,
         ),
         useMaterial3: true,
+        fontFamily: 'Roboto',
       ),
       routerConfig: router,
     );

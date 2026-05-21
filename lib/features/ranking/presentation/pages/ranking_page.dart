@@ -67,7 +67,7 @@ class _RankingPageState extends ConsumerState<RankingPage> with SingleTickerProv
         return Card(
           elevation: isTop3 ? 4 : 1,
           margin: const EdgeInsets.only(bottom: 12),
-          shape: RoundedRectangleBinding(
+          shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
             side: isTop3 ? BorderSide(color: medalColor, width: 2) : BorderSide.none,
           ),

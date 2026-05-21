@@ -47,7 +47,7 @@ class LocationsPage extends ConsumerWidget {
                 final isOpen = index != 2; // Simula uma fechada
                 return Card(
                   margin: const EdgeInsets.only(bottom: 16),
-                  shape: RoundedRectangleBinding(
+                  shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: Column(

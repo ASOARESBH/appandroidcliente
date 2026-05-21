@@ -12,6 +12,8 @@ class RegisterPage extends ConsumerStatefulWidget {
 
 class _RegisterPageState extends ConsumerState<RegisterPage> {
   int _currentStep = 0;
+  bool _obscureSenha = true;
+  bool _obscureConfirm = true;
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +29,6 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
           if (_currentStep < 2) {
             setState(() => _currentStep += 1);
           } else {
-            // Finalizar cadastro
             context.go('/dashboard');
           }
         },
@@ -71,11 +72,13 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             isActive: _currentStep >= 0,
             content: Column(
               children: const [
-                TextField(decoration: InputDecoration(labelText: 'Nome Completo')),
+                TextField(decoration: InputDecoration(labelText: 'Nome Completo', border: OutlineInputBorder())),
                 SizedBox(height: 16),
-                TextField(decoration: InputDecoration(labelText: 'CPF')),
+                TextField(decoration: InputDecoration(labelText: 'CPF', border: OutlineInputBorder())),
                 SizedBox(height: 16),
-                TextField(decoration: InputDecoration(labelText: 'Data de Nascimento')),
+                TextField(decoration: InputDecoration(labelText: 'Data de Nascimento', border: OutlineInputBorder())),
+                SizedBox(height: 16),
+                TextField(decoration: InputDecoration(labelText: 'RG', border: OutlineInputBorder())),
               ],
             ),
           ),
@@ -84,22 +87,44 @@ class _RegisterPageState extends ConsumerState<RegisterPage> {
             isActive: _currentStep >= 1,
             content: Column(
               children: const [
-                TextField(decoration: InputDecoration(labelText: 'Email')),
+                TextField(decoration: InputDecoration(labelText: 'Email', border: OutlineInputBorder())),
                 SizedBox(height: 16),
-                TextField(decoration: InputDecoration(labelText: 'WhatsApp')),
+                TextField(decoration: InputDecoration(labelText: 'WhatsApp', border: OutlineInputBorder())),
+                SizedBox(height: 16),
+                TextField(decoration: InputDecoration(labelText: 'CEP', border: OutlineInputBorder())),
+                SizedBox(height: 16),
+                TextField(decoration: InputDecoration(labelText: 'Endereço', border: OutlineInputBorder())),
               ],
             ),
           ),
           Step(
-            title: const Text('Endereço e Senha'),
+            title: const Text('Senha'),
             isActive: _currentStep >= 2,
             content: Column(
-              children: const [
-                TextField(decoration: InputDecoration(labelText: 'CEP')),
-                SizedBox(height: 16),
-                TextField(decoration: InputDecoration(labelText: 'Senha', obscureText: true)),
-                SizedBox(height: 16),
-                TextField(decoration: InputDecoration(labelText: 'Confirmar Senha', obscureText: true)),
+              children: [
+                TextField(
+                  obscureText: _obscureSenha,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscureSenha ? Icons.visibility_off : Icons.visibility),
+                      onPressed: () => setState(() => _obscureSenha = !_obscureSenha),
+                    ),
+                  ),
+                ),
+                const SizedBox(height: 16),
+                TextField(
+                  obscureText: _obscureConfirm,
+                  decoration: InputDecoration(
+                    labelText: 'Confirmar Senha',
+                    border: const OutlineInputBorder(),
+                    suffixIcon: IconButton(
+                      icon: Icon(_obscureConfirm ? Icons.visibility_off : Icons.visibility),
+                      onPressed: () => setState(() => _obscureConfirm = !_obscureConfirm),
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
