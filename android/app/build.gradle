@@ -25,8 +25,8 @@ if (flutterVersionName == null) {
 
 android {
     namespace = "br.com.choppon.choppon_app"
-    compileSdk = 34
-    ndkVersion = "25.1.8937393"
+    compileSdk = 36
+    ndkVersion = "28.2.13676358"
 
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -39,7 +39,7 @@ android {
 
     defaultConfig {
         applicationId = "br.com.choppon.choppon_app"
-        minSdkVersion = flutter.minSdkVersion
+        minSdk = 21
         targetSdk = 34
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
