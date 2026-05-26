@@ -39,8 +39,8 @@ android {
 
     defaultConfig {
         applicationId = "br.com.choppon.choppon_app"
-        minSdk = 21
-        targetSdk = 36
+        minSdkVersion = flutter.minSdkVersion
+        targetSdk = 34
         versionCode = flutterVersionCode.toInteger()
         versionName = flutterVersionName
     }
