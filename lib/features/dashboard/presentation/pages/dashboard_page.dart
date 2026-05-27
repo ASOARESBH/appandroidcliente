@@ -24,7 +24,7 @@ class DashboardPage extends ConsumerWidget {
           IconButton(
             icon: const Icon(Icons.person),
             onPressed: () {
-              // Ir para perfil
+              context.push('/profile');
             },
           ),
         ],
@@ -37,9 +37,13 @@ class DashboardPage extends ConsumerWidget {
             // Topo: Saudação
             Row(
               children: [
-                const CircleAvatar(
-                  radius: 30,
-                  backgroundImage: AssetImage('assets/images/default_avatar.png'),
+                GestureDetector(
+                  onTap: () => context.push('/profile'),
+                  child: const CircleAvatar(
+                    radius: 30,
+                    backgroundColor: Colors.white,
+                    child: Icon(Icons.person, size: 36, color: Colors.grey),
+                  ),
                 ),
                 const SizedBox(width: 16),
                 Column(

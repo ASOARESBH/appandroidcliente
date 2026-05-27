@@ -11,6 +11,7 @@ import '../../features/admin/presentation/pages/admin_dashboard_page.dart';
 import '../../features/points/presentation/pages/points_page.dart';
 import '../../features/history/presentation/pages/history_page.dart';
 import '../../features/auth/presentation/pages/register_page.dart';
+import '../../features/profile/presentation/pages/profile_page.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -56,6 +57,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/pay',
         builder: (context, state) => const Scaffold(body: Center(child: Text('Pagamento'))),
+      ),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfilePage(),
       ),
     ],
   );
